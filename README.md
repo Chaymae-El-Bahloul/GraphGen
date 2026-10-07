@@ -131,7 +131,7 @@ Sur Render ou Railway: commande de build `pip install -r requirements.txt`, comm
 Projet réalisé par :
 
 - **Chaymae El Bahloul**: [GitHub](https://github.com/Chaymae-El-Bahloul) · [LinkedIn](https://www.linkedin.com/in/chaymae-el-bahloul)
-- **Samah Boudallaa**: [GitHub](https://github.com/Samah-boudallaa) [LinkedIn]([LinkedIn](www.linkedin.com/in/samah-boudallaa-92409a329)
+- **Samah Boudallaa**: [GitHub](https://github.com/Samah-boudallaa)  [LinkedIn](www.linkedin.com/in/samah-boudallaa-92409a329)
 
 Étudiantes en Data Science.
 
