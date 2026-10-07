@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GraphGen: transformez vos fichiers CSV et Excel en graphiques interactifs.">
+  <title>{% block title %}GraphGen · Visualisation de données{% endblock %}</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="{{ url_for('index') }}"><span class="logo">📊</span> GraphGen</a>
+    <ol class="steps" aria-label="Étapes">
+      {% for n, label in [(1, 'Importer'), (2, 'Explorer'), (3, 'Visualiser')] %}
+      <li class="{{ 'done' if step > n }} {{ 'now' if step == n }}"><i>{{ n }}</i> {{ label }}</li>
+      {% endfor %}
+    </ol>
+  </header>
+  <main class="wrap">
+    {% with msgs = get_flashed_messages(with_categories=true) %}
+      {% for cat, m in msgs %}<div class="flash {{ cat }}" role="alert">{{ m }}</div>{% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer>GraphGen · Flask · pandas · Plotly &nbsp;·&nbsp; Vos fichiers sont supprimés automatiquement après 24 h.</footer>
+</body>
+</html>

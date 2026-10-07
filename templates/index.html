@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+{% if not_found %}<div class="flash error">Page ou fichier introuvable (les fichiers expirent après 24 h).</div>{% endif %}
+<section class="hero">
+  <h1>Transformez vos données en graphiques interactifs</h1>
+  <p>Importez un fichier CSV ou Excel, explorez-le, puis visualisez-le en quelques clics.</p>
+</section>
+<section class="card narrow">
+  <form method="post" action="{{ url_for('upload') }}" enctype="multipart/form-data" id="up">
+    <label class="drop" id="drop">
+      <span class="big">⬆</span>
+      <b id="fname">Glissez votre fichier ici</b>
+      <small>ou cliquez pour parcourir · .csv, .xlsx · 10 Mo max</small>
+      <input type="file" name="file" accept=".csv,.xlsx" required hidden id="file">
+    </label>
+    <button type="submit">Analyser le fichier</button>
+    <a class="btn ghost center" href="{{ url_for('demo') }}">Essayer avec un jeu de données de démo</a>
+  </form>
+</section>
+<section class="features">
+  <div class="card"><h3>🔍 Exploration</h3><p>Profil de chaque colonne, valeurs manquantes, doublons et matrice de corrélation.</p></div>
+  <div class="card"><h3>📈 6 types de graphiques</h3><p>Lignes, barres, nuages de points, histogrammes, boîtes à moustaches, camemberts.</p></div>
+  <div class="card"><h3>📑 Excel intelligent</h3><p>Multi-feuilles et détection automatique de la ligne d'en-tête.</p></div>
+</section>
+<script>
+const f=document.getElementById('file'),d=document.getElementById('drop'),n=document.getElementById('fname');
+f.onchange=()=>{if(f.files[0])n.textContent=f.files[0].name};
+['dragover','dragenter'].forEach(e=>d.addEventListener(e,x=>{x.preventDefault();d.classList.add('hot')}));
+['dragleave','drop'].forEach(e=>d.addEventListener(e,x=>{x.preventDefault();d.classList.remove('hot')}));
+d.addEventListener('drop',x=>{f.files=x.dataTransfer.files;f.onchange()});
+</script>
+{% endblock %}

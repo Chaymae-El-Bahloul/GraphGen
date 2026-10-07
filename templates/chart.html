@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Graphique · GraphGen{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="chartbox">{{ chart|safe }}</div>
+  <div class="actions">
+    <a class="btn ghost" href="{{ back_url }}">← Modifier</a>
+    <a class="btn" href="{{ download_url }}">⬇ Télécharger (HTML interactif)</a>
+  </div>
+</section>
+{% endblock %}

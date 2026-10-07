@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.pytest_cache/
+.vscode/
+.idea/
+# Fichiers envoyes par les utilisateurs (donnees potentiellement privees)
+uploads/*
+!uploads/.gitkeep

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Explorer · GraphGen{% endblock %}
+{% block content %}
+<section class="kpis">
+  <div class="kpi"><b>{{ kpis.rows }}</b><span>lignes</span></div>
+  <div class="kpi"><b>{{ kpis.cols }}</b><span>colonnes</span></div>
+  <div class="kpi"><b>{{ kpis.numeric }}</b><span>numériques</span></div>
+  <div class="kpi {{ 'warn' if kpis.missing_pct > 5 }}"><b>{{ kpis.missing_pct }}%</b><span>valeurs manquantes</span></div>
+  <div class="kpi {{ 'warn' if kpis.duplicates }}"><b>{{ kpis.duplicates }}</b><span>doublons</span></div>
+</section>
+
+<section class="card">
+  {% if sheets %}
+  <form method="get" class="inline">
+    <label>Feuille
+      <select name="sheet" onchange="this.form.header.value='';this.form.submit()">
+        {% for s in sheets %}<option value="{{ s }}" {{ 'selected' if s == sheet }}>{{ s }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>Ligne d'en-tête (0 = première)
+      <input type="number" name="header" min="0" value="{{ header }}">
+    </label>
+    <button class="ghost" type="submit">Appliquer</button>
+  </form>
+  {% endif %}
+  <div class="tabs" role="tablist">
+    <button type="button" class="tab active" data-t="t1">Aperçu</button>
+    <button type="button" class="tab" data-t="t2">Profil des colonnes</button>
+    {% if corr %}<button type="button" class="tab" data-t="t3">Corrélations</button>{% endif %}
+  </div>
+  <div id="t1" class="pane active"><div class="scroll">{{ table|safe }}</div><p class="muted">10 premières lignes.</p></div>
+  <div id="t2" class="pane"><div class="scroll">
+    <table class="data"><thead><tr><th>Colonne</th><th>Type</th><th>Manquants</th><th>Uniques</th><th>Résumé</th></tr></thead><tbody>
+    {% for p in profile %}
+      <tr><td><b>{{ p.name }}</b></td>
+      <td><span class="badge {{ 'num' if p.numeric else 'txt' }}">{{ 'numérique' if p.numeric else 'texte / date' }}</span></td>
+      <td><div class="bar"><i style="width:{{ p.missing_pct }}%"></i></div>{{ p.missing }} ({{ p.missing_pct }}%)</td>
+      <td>{{ p.unique }}</td><td class="muted">{{ p.summary }}</td></tr>
+    {% endfor %}</tbody></table></div></div>
+  {% if corr %}<div id="t3" class="pane chartbox">{{ corr|safe }}</div>{% endif %}
+</section>
+
+<section class="card">
+  <h2>📈 Créer un graphique</h2>
+  <form method="get" action="{{ url_for('chart') }}" class="grid">
+    <input type="hidden" name="file_id" value="{{ file_id }}">
+    {% if sheet %}<input type="hidden" name="sheet" value="{{ sheet }}">{% endif %}
+    <input type="hidden" name="header" value="{{ header }}">
+    <label>Type
+      <select name="kind">{% for k, v in chart_types.items() %}<option value="{{ k }}">{{ v }}</option>{% endfor %}</select></label>
+    <label>Colonne X
+      <select name="x" required>{% for c in cols %}<option>{{ c }}</option>{% endfor %}</select></label>
+    <label>Colonne Y (valeurs)
+      <select name="y"><option value="">—</option>{% for c in numeric %}<option>{{ c }}</option>{% endfor %}</select></label>
+    <label>Couleur / groupes
+      <select name="color"><option value="">—</option>{% for c in cols %}<option>{{ c }}</option>{% endfor %}</select></label>
+    <label>Agrégation
+      <select name="agg">{% for k, v in aggregations.items() %}<option value="{{ k }}">{{ v }}</option>{% endfor %}</select></label>
+    <label>Palette
+      <select name="palette">{% for p in palettes %}<option>{{ p }}</option>{% endfor %}</select></label>
+    <label class="span2">Titre (optionnel)
+      <input type="text" name="title" maxlength="120" placeholder="Titre automatique si vide"></label>
+    <button type="submit">Générer le graphique</button>
+  </form>
+  <p class="muted">Astuce: pour totaliser par catégorie, choisissez Barres + Somme.</p>
+</section>
+<script>
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab,.pane').forEach(e=>e.classList.remove('active'));
+  b.classList.add('active');document.getElementById(b.dataset.t).classList.add('active');
+  window.dispatchEvent(new Event('resize'));});
+</script>
+{% endblock %}
