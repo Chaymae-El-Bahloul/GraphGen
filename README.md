@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📊 GraphGen
+# GraphGen
 
 **Transformez un fichier CSV ou Excel en analyse exploratoire et en graphiques interactifs, sans écrire une ligne de code.**
 
@@ -11,29 +11,29 @@
 ![Docker](https://img.shields.io/badge/Docker-pr%C3%AAt-2496ED?logo=docker&logoColor=white)
 ![License](https://img.shields.io/badge/licence-MIT-green)
 
-[Démo en ligne](#) · [Installation](#-démarrage-rapide) · [Fonctionnalités](#-fonctionnalités)
+[Démo en ligne](#) · [Installation](#démarrage-rapide) · [Fonctionnalités](#fonctionnalités)
 
 </div>
 
 <!-- Ajouter une capture d'écran: ![Aperçu](docs/screenshot.png) -->
 
-## 🎯 Pourquoi GraphGen ?
+## Pourquoi GraphGen ?
 
 Explorer un fichier de données demande souvent du code ou un outil lourd. **GraphGen** permet à n'importe qui d'importer un fichier, de comprendre sa qualité (valeurs manquantes, doublons, corrélations) et de produire des graphiques interactifs en quelques clics.
 
-## ✨ Fonctionnalités
+## Fonctionnalités
 
 | | |
 |---|---|
-| **📥 Import** | `.csv` et `.xlsx` multi-feuilles (10 Mo max), glisser-déposer, jeu de données de démonstration intégré |
-| **🧠 Détection automatique** | Séparateur CSV, encodage, et **ligne d'en-tête Excel** (ignore les lignes de titre) |
-| **🔍 Exploration** | Indicateurs clés (lignes, colonnes, % de manquants, doublons), **profil de chaque colonne**, **matrice de corrélation** |
-| **📈 Visualisation** | 6 types de graphiques: ligne, barres, nuage de points, histogramme, boîte à moustaches, camembert |
-| **🧮 Agrégations** | Somme, moyenne, nombre, minimum, maximum, avec regroupement par couleur |
-| **🎨 Personnalisation** | 5 palettes, titre libre, **export HTML interactif** |
-| **📱 Interface** | Responsive, mode sombre automatique |
+| **Import** | `.csv` et `.xlsx` multi-feuilles (10 Mo max), glisser-déposer, jeu de données de démonstration intégré |
+| **Détection automatique** | Séparateur CSV, encodage, et **ligne d'en-tête Excel** (ignore les lignes de titre) |
+| **Exploration** | Indicateurs clés (lignes, colonnes, % de manquants, doublons), **profil de chaque colonne**, **matrice de corrélation** |
+| **Visualisation** | 6 types de graphiques: ligne, barres, nuage de points, histogramme, boîte à moustaches, camembert |
+| **Agrégations** | Somme, moyenne, nombre, minimum, maximum, avec regroupement par couleur |
+| **Personnalisation** | 5 palettes, titre libre, **export HTML interactif** |
+| **Interface** | Responsive, mode sombre automatique |
 
-## ⚙️ Comment ça marche
+## Comment ça marche
 
 ```mermaid
 flowchart LR
@@ -44,7 +44,7 @@ flowchart LR
     E --> F[Export HTML]
 ```
 
-## 🧰 Stack technique
+## Stack technique
 
 | Couche | Technologies |
 |---|---|
@@ -55,7 +55,7 @@ flowchart LR
 | Qualité | pytest, ruff, GitHub Actions |
 | Déploiement | Docker, Procfile (Render / Railway) |
 
-## 🚀 Démarrage rapide
+## Démarrage rapide
 
 ```bash
 git clone https://github.com/Chaymae-El-Bahloul/GraphGen.git
@@ -68,19 +68,19 @@ python app.py
 
 Ouvrir <http://127.0.0.1:5000>, puis cliquer sur **« Essayer avec un jeu de données de démo »**.
 
-### 🐳 Docker
+### Docker
 
 ```bash
 docker build -t graphgen .
 docker run -p 8000:8000 -e SECRET_KEY=change-me graphgen
 ```
 
-## 🔒 Qualité et sécurité
+## Qualité et sécurité
 
 - Fichiers stockés sous **identifiant aléatoire** (pas de path traversal), extensions validées, taille limitée
 - **Suppression automatique** des fichiers importés après 24 h
 - En-têtes de sécurité HTTP, route de santé `/health`, logs structurés
-- **12 tests** `pytest`, linter `ruff`, intégration continue GitHub Actions
+- **12 tests**`pytest`, linter `ruff`, intégration continue GitHub Actions
 - Conteneur Docker non-root avec healthcheck
 
 ```bash
@@ -89,7 +89,7 @@ ruff check .
 pytest
 ```
 
-## 🗂️ Architecture
+## Architecture
 
 ```
 GraphGen/
@@ -103,7 +103,7 @@ GraphGen/
 └── .github/workflows/ci.yml
 ```
 
-## 🔧 Configuration
+## Configuration
 
 | Variable | Rôle | Défaut |
 |---|---|---|
@@ -111,11 +111,11 @@ GraphGen/
 | `UPLOAD_TTL_HOURS` | Durée de conservation des fichiers importés | `24` |
 | `FLASK_DEBUG` | `1` pour activer le mode debug en local | désactivé |
 
-## ☁️ Déploiement
+## Déploiement
 
 Sur Render ou Railway: commande de build `pip install -r requirements.txt`, commande de démarrage `gunicorn "app:create_app()"` (voir `Procfile`), puis définir la variable `SECRET_KEY`.
 
-## 🗺️ Feuille de route
+## Feuille de route
 
 - [x] Import CSV / Excel multi-feuilles
 - [x] Profilage des colonnes et corrélations
@@ -126,7 +126,7 @@ Sur Render ou Railway: commande de build `pip install -r requirements.txt`, comm
 - [ ] Graphiques multi-séries
 - [ ] Authentification
 
-## 👩‍💻 Auteures
+## Auteures
 
 Projet réalisé par :
 
@@ -135,6 +135,6 @@ Projet réalisé par :
 
 Étudiantes en Data Science.
 
-## 📄 Licence
+## Licence
 
 Distribué sous licence MIT. Voir le fichier [LICENSE](LICENSE).
