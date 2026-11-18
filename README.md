@@ -1,4 +1,4 @@
-<div align="center">
+ <div align="center">
 
 # GraphGen
 
@@ -15,7 +15,6 @@
 
 </div>
 
-<!-- Ajouter une capture d'écran: ![Aperçu](docs/screenshot.png) -->
 
 ## Pourquoi GraphGen ?
 
@@ -26,9 +25,9 @@ Explorer un fichier de données demande souvent du code ou un outil lourd. **Gra
 | | |
 |---|---|
 | **Import** | `.csv` et `.xlsx` multi-feuilles (10 Mo max), glisser-déposer, jeu de données de démonstration intégré |
-| **Détection automatique** | Séparateur CSV, encodage, et **ligne d'en-tête Excel** (ignore les lignes de titre) |
+| **Détection automatique** | Séparateur CSV, encodage et **ligne d'en-tête Excel** (ignore les lignes de titre) |
 | **Exploration** | Indicateurs clés (lignes, colonnes, % de manquants, doublons), **profil de chaque colonne**, **matrice de corrélation** |
-| **Visualisation** | 6 types de graphiques: ligne, barres, nuage de points, histogramme, boîte à moustaches, camembert |
+| **Visualisation** | 6 types de graphiques : ligne, barres, nuage de points, histogramme, boîte à moustaches, camembert |
 | **Agrégations** | Somme, moyenne, nombre, minimum, maximum, avec regroupement par couleur |
 | **Personnalisation** | 5 palettes, titre libre, **export HTML interactif** |
 | **Interface** | Responsive, mode sombre automatique |
@@ -77,11 +76,11 @@ docker run -p 8000:8000 -e SECRET_KEY=change-me graphgen
 
 ## Qualité et sécurité
 
-- Fichiers stockés sous **identifiant aléatoire** (pas de path traversal), extensions validées, taille limitée
-- **Suppression automatique** des fichiers importés après 24 h
-- En-têtes de sécurité HTTP, route de santé `/health`, logs structurés
-- **12 tests**`pytest`, linter `ruff`, intégration continue GitHub Actions
-- Conteneur Docker non-root avec healthcheck
+- Fichiers stockés sous **identifiant aléatoire** (pas de path traversal), extensions validées, taille limitée.
+- **Suppression automatique** des fichiers importés après 24 h.
+- En-têtes de sécurité HTTP, route de santé `/health`, logs structurés.
+- **12 tests automatisés avec pytest**, vérification du code avec `ruff` et intégration continue via GitHub Actions.
+- Conteneur Docker non-root avec healthcheck.
 
 ```bash
 pip install -r requirements-dev.txt
@@ -91,7 +90,7 @@ pytest
 
 ## Architecture
 
-```
+```text
 GraphGen/
 ├── app.py              # Routes Flask, sécurité, configuration
 ├── helpers.py          # Chargement, profilage, corrélations, graphiques
@@ -113,7 +112,7 @@ GraphGen/
 
 ## Déploiement
 
-Sur Render ou Railway: commande de build `pip install -r requirements.txt`, commande de démarrage `gunicorn "app:create_app()"` (voir `Procfile`), puis définir la variable `SECRET_KEY`.
+Sur Render ou Railway : commande de build `pip install -r requirements.txt`, commande de démarrage `gunicorn "app:create_app()"` (voir `Procfile`), puis définir la variable `SECRET_KEY`.
 
 ## Feuille de route
 
@@ -130,8 +129,8 @@ Sur Render ou Railway: commande de build `pip install -r requirements.txt`, comm
 
 Projet réalisé par :
 
-- **Chaymae El Bahloul**: [GitHub](https://github.com/Chaymae-El-Bahloul) · [LinkedIn](https://www.linkedin.com/in/chaymae-el-bahloul)
-- **Samah Boudallaa**: [GitHub](https://github.com/Samah-boudallaa)  [LinkedIn](www.linkedin.com/in/samah-boudallaa-92409a329)
+- **Chaymae El Bahloul** : [GitHub](https://github.com/Chaymae-El-Bahloul) · [LinkedIn](https://www.linkedin.com/in/chaymae-el-bahloul)
+- **Samah Boudallaa** : [GitHub](https://github.com/Samah-boudallaa) · [LinkedIn](https://www.linkedin.com/in/samah-boudallaa-92409a329)
 
 Étudiantes en Data Science.
 
